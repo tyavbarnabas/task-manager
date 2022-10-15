@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap.min.css} " />
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" >
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto"></ul>
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/}" href="#">home</a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav><br><br>
+    <div class="container">
+        <h1 class="text-center">In Progress</h1>
+        <hr />
+
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Actions</th>
+                    <th>Id</th>
+                    <th>Description</th>
+                    <th>Complete</th>
+                    <th>Pending</th>
+                    <th>Created Date</th>
+                    <th>Updated Date</th>
+                    <th>Completed Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item : ${progress}" th:class="${item.complete} ? success : warning">
+                    <td>
+                        <div class="btn btn-group-sm" role="group">
+                            <a class="btn btn-info" th:href="@{/edit/{id}(id=${item.id})}">Edit</a>
+                            <a class="btn btn-danger" th:href="@{/delete/{id}(id=${item.id})}">Delete</a>
+                        </div>
+                    </td>
+                    <td th:text="${item.id}">id</td>
+                    <td th:text="${item.description}">description</td>
+                    <td th:text="${item.complete}">completed</td>
+                    <td th:text="${item.pending}">pending</td>
+                    <td th:text="${item.createdDate}">created_date</td>
+                    <td th:text="${item.updatedDate}">updated_date</td>
+                    <td th:text="${item.completedDate}">completed_date</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><a class="btn btn-success" th:href="@{/add-todo-item}">Add a task!</a></p>
+
+
+    </div>
+
+    <script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/3.4.1/js/bootstrap.min.js}"></script>
+</body>
+
+</html>
